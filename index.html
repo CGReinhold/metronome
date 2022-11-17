@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <link href="./styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <svg onclick="cursorClick()">
+      <line id="line" x1="-100px" y1="-100px" x2="-100px" y2="-100px" stroke="rgb(245,245,245)" stroke-width="2" />
+      <circle id="cursor" cx="0" cy="0" r="10" fill="rgb(245,245,245)" />
+      <text id="text" x="0" y="0" text-anchor="middle" fill="rgb(245,245,245)" transform="translate(0 30)">0</text>
+    </svg>
+    <script src="./metronome.js"></script>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
