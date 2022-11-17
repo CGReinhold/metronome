@@ -10,7 +10,6 @@ const cursor = document.getElementById('cursor')
 const line = document.getElementById('line')
 const text = document.getElementById('text')
 const metronome = new Metronome()
-const sound = new Audio('beep.mp3')
 
 /* 
 Formula to get points of a circle
