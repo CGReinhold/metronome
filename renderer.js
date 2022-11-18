@@ -10,6 +10,7 @@ const cursor = document.getElementById('cursor')
 const line = document.getElementById('line')
 const text = document.getElementById('text')
 const metronome = new Metronome()
+const speed = 5
 
 /* 
 Formula to get points of a circle
@@ -32,10 +33,16 @@ const setNewPosition = ({ x, y }) => {
 
 const moveBall = (startsOnLeft = true) => {
   time = Date.now()
-  movementInterval = setInterval(() => {      
-    const x = getX(center.x - xAxisSpan / 2, xAxisSpan, (Date.now() - time + (startsOnLeft ? 0 : xAxisSpan * 5)) / 5)
+  movementInterval = setInterval(() => {
+    const x = getX(center.x - xAxisSpan / 2, xAxisSpan, (Date.now() - time + (startsOnLeft ? 0 : xAxisSpan * speed)) / speed)
     const y = getY(center.x, center.y, x, lineSize)  
     setNewPosition({ x, y })
+
+    if (x > center.x - 3 && x < center.x + 3) {
+      cursor.setAttribute('r', 15)
+    } else {
+      cursor.setAttribute('r', 10)
+    }
   }, 1)
 }
 
@@ -52,8 +59,8 @@ const cursorClick = (event) => {
 const handleMousemove = (event) => {
   setNewPosition({ x: event.x, y: event.y })
   xAxisSpan = Math.abs(event.x - center.x) * 2 || 1
-  metronome.tempo = Math.round(12_000 / xAxisSpan)
-  metronome.delay = xAxisSpan / 500
+  metronome.tempo = Math.round((1_000 * 60 / speed) / xAxisSpan)
+  metronome.delay = xAxisSpan / (speed * 150)
   text.textContent = `${metronome.tempo} bpm`
 }
 
